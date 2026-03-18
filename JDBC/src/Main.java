@@ -30,9 +30,6 @@ public class Main {
                 System.out.println("Balance: " + balance);
                 System.out.println();
             }
-
-
-
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
