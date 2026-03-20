@@ -22,7 +22,7 @@ public class preparedStatementWrite {
             if(rowsAffected > 0){
                 System.out.println("Inserted into customers successfully");
             }else{
-                System.out.printf("NOT Inserted");
+                System.out.printf("NOT Inserted, try again");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
