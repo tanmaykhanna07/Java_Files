@@ -1,0 +1,7 @@
+Language Lock-in: A file created with Java Serialization can only be read by Java. If you later decide to write a Python script or a web frontend to read your students.dat file, they won't be able to understand the binary format. (This is why the industry mostly uses JSON or XML for sharing data).
+
+Fragility (Versioning Nightmares): If you serialize a hundred students to a file today, and tomorrow you update your Student.java class to add a phoneNumber field, your app will crash when trying to read the old file. The blueprint changed, so the freeze-dried data no longer matches.
+
+Security Risks: Deserializing data from an untrusted source is notoriously dangerous in Java. It is a common vector for hackers to execute malicious code on servers.
+
+Performance: It is notoriously slow and creates unnecessarily large files compared to other binary formats or modern databases.
