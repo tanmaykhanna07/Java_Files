@@ -6,9 +6,11 @@ public class LabOnBoarding {
     private static final String username = "root";
     private static final String password = "khanna2007";
     public static void main(String[] args){
+        Connection connection = null;
         try{
             Scanner scanner = new Scanner(System.in);
-            Connection connection = DriverManager.getConnection(url,username,password);
+            connection = DriverManager.getConnection(url,username,password);
+            connection.setAutoCommit(false);
             String query = "INSERT INTO labs(lab_name,building) VALUES(?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,"Quantum Mechanics Lab");
@@ -41,8 +43,20 @@ public class LabOnBoarding {
             }else{
                 System.out.println("INSERTION FAILED!");
             }
+            connection.commit();
         }catch (SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println("Crash detected, rolling back the database");
+            try{
+                if(connection != null){
+                    connection.rollback();
+                    System.out.println("Rollback successful");
+                }
+
+            }catch (SQLException o){
+                System.out.println("Can't rollback");
+                System.out.println(o.getMessage());
+            }
+            e.printStackTrace();
         }
     }
 }

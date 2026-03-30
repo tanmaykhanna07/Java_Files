@@ -7,6 +7,7 @@ public class LabFileReading {
     public static void main(String[] args){
         try{
             Connection connection = DriverManager.getConnection(url,username,password);
+            connection.setAutoCommit(false);
             String query = "SELECT * FROM workstations WHERE lab_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1,7);
@@ -16,6 +17,7 @@ public class LabFileReading {
                 System.out.println("Status: " + resultSet.getString("status"));
                 System.out.println(" ");
             }
+            connection.commit();
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
